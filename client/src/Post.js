@@ -1,16 +1,25 @@
-export default function Post(){
-    return(<div className="post">
-    <div className="image">
-    <img src="https://techcrunch.com/wp-content/uploads/2023/05/wattpad-logo.jpg?w=730&crop=1" alt="wattapad" />
-    </div>
-    <div className="texts">
-    <h2>Wattpad ditches ‘Paid Stories’ for a freemium model</h2>
-    <p className="info">
-      <a className="author">Anish Sawant</a>
-      <time>20223-10-03 20:43</time>
-    </p>
-    <p className="Summary">After launching its “Paid Stories” program in 2019, the social storytelling platform Wattpad is now replacing it with a new freemium model called ...</p>
+import {formatISO9075} from "date-fns";
+import {Link} from "react-router-dom";
 
+export default function Post({_id,title,summary,cover,content,createdAt,author}) {
+
+  return (
+    <div className="post">
+      <div className="image">
+        <Link to={`/post/${_id}`}>
+          <img src={'http://localhost:4000/'+cover} alt=""/>
+        </Link>
+      </div>
+      <div className="texts">
+        <Link to={`/post/${_id}`}>
+        <h2>{title}</h2>
+        </Link>
+        <p className="info">
+          <a className="author">{author.username}</a>
+          <time>{formatISO9075(new Date(createdAt))}</time>
+        </p>
+        <p className="summary">{summary}</p>
+      </div>
     </div>
-  </div>)
+  );
 }
